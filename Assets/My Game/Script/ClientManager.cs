@@ -23,6 +23,7 @@ public class ClientManager : MonoBehaviour
     public AudioClip[] sfxSad;
     [HideInInspector]
     public int index;
+    public int successfulClients = 0;
 
     private SkeletonAnimation skeletonAnimation;
     private AudioSource _AS;
@@ -49,7 +50,7 @@ public class ClientManager : MonoBehaviour
             PlayerStats.instance.Gold += 10;
             SpawnManager.instance.DeativateClient(index);
             Destroy(potionGiven);
-
+            successfulClients++;
         }
         else
         {

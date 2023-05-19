@@ -22,8 +22,8 @@ public class SpawnManager : MonoBehaviour {
 	public SpawnPoints[] SpawnPointsTab;
 	public ClientManager[] clientsTab;
 	public Sprite[] demandTab;
-	public float waitTime; 
-
+	public float waitTime;
+	public int failedClients=0;
 	// Private variable
 	private int _spawnNumber;
 
@@ -117,6 +117,7 @@ public class SpawnManager : MonoBehaviour {
 			if (SpawnPointsTab[index].progress.value <= 0f) {
 				PlayerStats.instance.lifePoints--;
 				DeativateClient (index);
+				failedClients++;
 				yield break;
 			} else {
 				yield return new WaitForSeconds (waitTime);

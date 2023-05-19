@@ -15,7 +15,6 @@ public class UIManager : MonoBehaviour {
 	public Text goldText;
     public Image goldImage;
 
-
 	[Space]
 
 	[Header("End game UI")]
@@ -58,6 +57,7 @@ public class UIManager : MonoBehaviour {
         {
             goldImage.gameObject.SetActive(true);
         }
+		
         if (playAgain != null) {
 			playAgain.gameObject.SetActive (false);
 		}
@@ -80,6 +80,7 @@ public class UIManager : MonoBehaviour {
         {
             goldImage.gameObject.SetActive(false);
         }
+        
         if (playAgain != null) {
 			playAgain.gameObject.SetActive (true);
 		}
