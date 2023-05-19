@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour {
 
@@ -20,6 +21,7 @@ public class PlayerStats : MonoBehaviour {
 		set { _gold = value; }
 	}
 
+
 	void Awake() {
 		instance = this;
 	}
@@ -36,5 +38,7 @@ public class PlayerStats : MonoBehaviour {
 		if (lifePoints <= 0) {
 			GameManager.instance.gameState = GameManager.gameStates.GameOver;
 		}
+
+		
 	}
 }
