@@ -11,6 +11,7 @@ public class PlayerStats : MonoBehaviour
 
     //Public Variables
     public int lifePoints = 3;
+    public int satisfiedClients = 0;
 
     // Private Variables
     [SerializeField]
@@ -41,6 +42,7 @@ public class PlayerStats : MonoBehaviour
         if (lifePoints <= 0)
         {
             GameManager.instance.gameState = GameManager.gameStates.GameOver;
+            satisfiedClients = _gold / 10;
         }
 
 
