@@ -100,8 +100,10 @@ public class KitleManager : MonoBehaviour {
                 {
                     slots[i].GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
                     ingredients[i] = item;
-                    //RestartProgress();
-                    StartCoroutine(InProgress());
+					if (i == 2) { 
+						RestartProgress();
+						StartCoroutine(InProgress());
+					}
                     break;
                 }
             }
@@ -109,13 +111,13 @@ public class KitleManager : MonoBehaviour {
     }
 
 	// Initilialize Progress bar
-	//private void RestartProgress() {
+	private void RestartProgress() {
 		
-	//	isCooking = true;
- //       _AM.Play();
-	//	progressBar.gameObject.SetActive (true);
-	//	progressBar.value = progressBar.maxValue;
-	//}
+		isCooking = true;
+        _AM.Play();
+		progressBar.gameObject.SetActive (true);
+		progressBar.value = progressBar.maxValue;
+	}
 		
 	// Progress bar statut
 	private IEnumerator InProgress(){
@@ -131,9 +133,9 @@ public class KitleManager : MonoBehaviour {
 				isCooking = false;
 				yield break;
 
-			} //else {
-			//	yield return new WaitForSeconds (1f);
-			//}
+			} else {
+				yield return new WaitForSeconds (1f);
+			}
 		}
 	}
 
