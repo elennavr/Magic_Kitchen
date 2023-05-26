@@ -23,7 +23,6 @@ public class SpawnManager : MonoBehaviour {
 	public ClientManager[] clientsTab;
 	public Sprite[] demandTab;
 	public float waitTime;
-	public int failedClients=0;
 	// Private variable
 	private int _spawnNumber;
 
@@ -82,9 +81,9 @@ public class SpawnManager : MonoBehaviour {
 		// Reset Slider value
 		SpawnPointsTab[index].progress.maxValue = 100f;
 		SpawnPointsTab[index].progress.value = SpawnPointsTab[index].progress.maxValue;
-
-		// Start Couroutine
-		StartCoroutine(ActiveProgressBar(index, 1f));
+        SpawnPointsTab[index].progress.interactable = false;
+        // Start Couroutine
+        StartCoroutine(ActiveProgressBar(index, 1f));
 	}
 
 	// Coroutine for each progress bar 
@@ -117,7 +116,6 @@ public class SpawnManager : MonoBehaviour {
 			if (SpawnPointsTab[index].progress.value <= 0f) {
 				PlayerStats.instance.lifePoints--;
 				DeativateClient (index);
-				failedClients++;
 				yield break;
 			} else {
 				yield return new WaitForSeconds (waitTime);

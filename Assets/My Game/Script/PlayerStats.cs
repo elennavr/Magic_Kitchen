@@ -11,7 +11,10 @@ public class PlayerStats : MonoBehaviour
 
     //Public Variables
     public int lifePoints = 3;
-    public int satisfiedClients = 0;
+    public string satisfiedClients;
+    public string satPercentage;
+    public string[] lifeStamps = new string[3];
+    public string username;
 
     // Private Variables
     [SerializeField]
@@ -27,11 +30,12 @@ public class PlayerStats : MonoBehaviour
     void Awake()
     {
         instance = this;
+        
+        username = PlayerPrefs.GetString("Username");
     }
 
     void Update()
     {
-
         if (Gold < 0)
         {
             Gold = 0;
@@ -42,7 +46,9 @@ public class PlayerStats : MonoBehaviour
         if (lifePoints <= 0)
         {
             GameManager.instance.gameState = GameManager.gameStates.GameOver;
-            satisfiedClients = _gold / 10;
+            timer.instance.lifeTimestamps(lifeStamps);
+            satisfiedClients = (_gold / 10).ToString();
+            satPercentage = (((_gold / 10) * 100D)/((_gold / 10) +3D)).ToString();
         }
 
 

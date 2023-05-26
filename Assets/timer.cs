@@ -40,10 +40,10 @@ public class timer : MonoBehaviour
         else
         {
             //For testing purposes
-            while (game) { 
-                Debug.Log(timeStamps[0] + " " + timeStamps[1] + " " + timeStamps[2]);
-                game = false;
-            }
+            //while (game) { 
+            //    Debug.Log(timeStamps[0] + " " + timeStamps[1] + " " + timeStamps[2]);
+            //    game = false;
+            //}
         }
         
     }
@@ -72,5 +72,14 @@ public class timer : MonoBehaviour
         {
             timeStamps[2] = timerText.text;
         }
+    }
+
+    public void lifeTimestamps(string[] lifeStamp)
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            lifeStamp[i] = timeStamps[i];
+        }
+        
     }
 }
