@@ -26,8 +26,8 @@ public class SpawnManager : MonoBehaviour {
 	// Private variable
 	private int _spawnNumber;
 
-	// Use this for initialization for components and Physics
-	void Awake(){
+    // Use this for initialization for components and Physics
+    void Awake(){
 		instance = this;
 	}
 
@@ -74,13 +74,12 @@ public class SpawnManager : MonoBehaviour {
 
 		// Set index to the client
 		_CM.index = index;
-
 		// Spawn Client
 		Instantiate(SpawnPointsTab[index].client,SpawnPointsTab[index].spawnPoint);
 
 		// Reset Slider value
 		SpawnPointsTab[index].progress.maxValue = 100f;
-		SpawnPointsTab[index].progress.value = SpawnPointsTab[index].progress.maxValue;
+		SpawnPointsTab[index].progress.value = 100f;
         SpawnPointsTab[index].progress.interactable = false;
         // Start Couroutine
         StartCoroutine(ActiveProgressBar(index, 1f));
@@ -89,25 +88,25 @@ public class SpawnManager : MonoBehaviour {
 	// Coroutine for each progress bar 
 	public IEnumerator ActiveProgressBar(int index, float waitTime)
 	{
+		
 		ClientManager _CM;
-        float _minRange, _maxRange, reduceTime;
+        float reduceTime;
 
 		_CM = SpawnPointsTab [index].client;
-        _maxRange = GameManager.instance.RatioLevel() + _CM.nbProgressPoint;
+        //_maxRange = GameManager.instance.RatioLevel() + _CM.nbProgressPoint;
 
-        if (GameManager.instance.RatioLevel() - _CM.nbProgressPoint > 0.0F)
-        {
-            _minRange = GameManager.instance.RatioLevel() - _CM.nbProgressPoint;
-        }
-        else
-        {
-            _minRange = 0.0f;
-        }
+        //if (GameManager.instance.RatioLevel() - _CM.nbProgressPoint > 0.0F)
+        //{
+        //    _minRange = GameManager.instance.RatioLevel() - _CM.nbProgressPoint;
+        //}
+        //else
+        //{
+        //    _minRange = 0.0f;
+        //}
 
-        reduceTime = Random.Range(_minRange, _maxRange);
+        reduceTime = 1.0f;
 
         while (true) {
-
             if (GameManager.instance.gameState == GameManager.gameStates.Playing)
             {
 			    SpawnPointsTab[index].progress.value -= reduceTime;
@@ -115,7 +114,8 @@ public class SpawnManager : MonoBehaviour {
 
 			if (SpawnPointsTab[index].progress.value <= 0f) {
 				PlayerStats.instance.lifePoints--;
-				DeativateClient (index);
+				
+				DeactivateClient(index);
 				yield break;
 			} else {
 				yield return new WaitForSeconds (waitTime);
@@ -124,7 +124,7 @@ public class SpawnManager : MonoBehaviour {
 	}
 
 
-	public void DeativateClient(int index){
+	public void DeactivateClient(int index){
 		// Destroy Client object spawned
 		for (int i = 0; i < SpawnPointsTab [index].spawnPoint.childCount; i++) {
 			if (SpawnPointsTab [index].spawnPoint.transform.GetChild (i).tag == "Client") {
@@ -134,7 +134,8 @@ public class SpawnManager : MonoBehaviour {
 
         // Deactive UI of this Spawn Point
         //SpawnPointsTab[index].progress.value = SpawnPointsTab[index].progress.maxValue;
-        StopCoroutine(ActiveProgressBar(index, 1f));
+        
+        StopCoroutine(StartCoroutine(ActiveProgressBar(index, 1f)));
         SpawnPointsTab[index].progress.gameObject.SetActive (false);
 		SpawnPointsTab [index].client = null;
 		SpawnPointsTab [index].demand.sprite = null;
@@ -165,8 +166,8 @@ public class SpawnManager : MonoBehaviour {
 	// Deactivate Spawning
 	public void StopSpawning(){
 		for (int i = 0; i < SpawnPointsTab.Length; i++) {
-			DeativateClient (i);
+			DeactivateClient (i);
 		}
-		// StopCoroutine (SpawnClient (waitTime));
+		//StopCoroutine (spawnClient);
 	}
 }

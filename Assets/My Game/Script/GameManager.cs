@@ -72,14 +72,14 @@ public class GameManager : MonoBehaviour
     public float RatioLevel() {
 
         int indexRatio = 0;
-        for (int i = Levels.Length -1; i >= 0; i--)
-        {
-            if (PlayerStats.instance.Gold >= Levels[i].scoreTarget)
-            {
-                indexRatio = i;
-                break;
-            }
-        }
+        //for (int i = Levels.Length -1; i >= 0; i--)
+        //{
+        //    if (PlayerStats.instance.Gold >= Levels[i].scoreTarget)
+        //    {
+        //        indexRatio = i;
+        //        break;
+        //    }
+        //}
 
         return Levels[indexRatio].ratio;
     }
