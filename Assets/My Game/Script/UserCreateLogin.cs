@@ -25,9 +25,9 @@ public class UserCreateLogin : MonoBehaviour {
 	public GameObject create;
 	public GameObject mainMenu;
 
-	string CreateUserURL = "http://games.csd.auth.gr/MagicKitchen/Scripts/insertuser.php";
-	string LoginURL = "http://games.csd.auth.gr/MagicKitchen/Scripts/check.php";
-	string LogoutURL = "http://games.csd.auth.gr/MagicKitchen/Scripts/disconnect.php";
+	string CreateUserURL = "http://localhost/MagicKitchen/Scripts/insertuser.php";
+	string LoginURL = "http://localhost/MagicKitchen/Scripts/check.php";
+	string LogoutURL = "http://localhost/MagicKitchen/Scripts/disconnect.php";
 
 	public string[] userInfo; //array of user account info
 
@@ -109,7 +109,7 @@ public class UserCreateLogin : MonoBehaviour {
 
 	public void fetchUserData() 
 	{
-		string link = "http://games.csd.auth.gr/MagicKitchen/Scripts/getUser.php"; //url to get user data
+		string link = "http://localhost/MagicKitchen/Scripts/getUser.php"; //url to get user data
 		StartCoroutine (getUserData (link));
 
 	}

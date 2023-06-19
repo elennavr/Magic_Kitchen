@@ -48,7 +48,7 @@ public class ClientManager : MonoBehaviour
         if (potion.tag == potionGiven.tag)
         {
             PlayerStats.instance.Gold += 10;
-            SpawnManager.instance.DeactivateClient(index);
+            SpawnManager.instance.DeativateClient(index);
             Destroy(potionGiven);
             successfulClients++;
         }

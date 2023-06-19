@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerStats : MonoBehaviour
     public string satPercentage;
     public string[] lifeStamps = new string[3];
     public string username;
+    public string levelType;
 
     // Private Variables
     [SerializeField]
@@ -30,7 +32,7 @@ public class PlayerStats : MonoBehaviour
     void Awake()
     {
         instance = this;
-        
+        levelType = SceneManager.GetActiveScene().name;
         username = PlayerPrefs.GetString("Username");
     }
 

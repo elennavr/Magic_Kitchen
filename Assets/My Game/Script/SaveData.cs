@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 
-public class SaveData : MonoBehaviour {
+public class SaveData : MonoBehaviour
+{
 
 
-    string SaveDataURL = "http://games.csd.auth.gr/MagicKitchen/Scripts/saveData.php";
+    string SaveDataURL = "http://localhost/MagicKitchen/Scripts/saveData.php";
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if (GameManager.instance.gameState == GameManager.gameStates.GameOver)
         {
             LoginToDB();
@@ -30,11 +32,11 @@ public class SaveData : MonoBehaviour {
 
     public void LoginToDB()
     {
-        StartCoroutine(SaveUserData(PlayerStats.instance.username, PlayerStats.instance.satisfiedClients, PlayerStats.instance.satPercentage, PlayerStats.instance.lifeStamps[0], PlayerStats.instance.lifeStamps[1], PlayerStats.instance.lifeStamps[2]));
+        StartCoroutine(SaveUserData(PlayerStats.instance.username, PlayerStats.instance.satisfiedClients, PlayerStats.instance.satPercentage, PlayerStats.instance.lifeStamps[0], PlayerStats.instance.lifeStamps[1], PlayerStats.instance.lifeStamps[2], PlayerStats.instance.levelType));
     }
 
     //function that checks user info with db and logs you in
-    public IEnumerator SaveUserData(string username, string satisfiedClients, string satPercentage, string firstLife, string middleLife, string lastLife)
+    public IEnumerator SaveUserData(string username, string satisfiedClients, string satPercentage, string firstLife, string middleLife, string lastLife, string levelType)
     {
         List<IMultipartFormSection> wwwForm = new List<IMultipartFormSection>();
 
@@ -44,6 +46,7 @@ public class SaveData : MonoBehaviour {
         wwwForm.Add(new MultipartFormDataSection("firstLifePost", firstLife));
         wwwForm.Add(new MultipartFormDataSection("middleLifePost", middleLife));
         wwwForm.Add(new MultipartFormDataSection("lastLifePost", lastLife));
+        wwwForm.Add(new MultipartFormDataSection("levelTypePost", levelType));
 
         UnityWebRequest www = UnityWebRequest.Post(SaveDataURL, wwwForm);
 
@@ -61,4 +64,4 @@ public class SaveData : MonoBehaviour {
             Debug.Log("something went wrong");
         }
     }
-    }
+}
