@@ -9,7 +9,7 @@ public class SaveData : MonoBehaviour
 {
 
 
-    string SaveDataURL = "http://localhost/MagicKitchen/Scripts/saveData.php";
+    string SaveDataURL = "http://games.csd.auth.gr/MagicKitchen/Scripts/saveData.php";
 
     // Use this for initialization
     void Start()
