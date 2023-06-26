@@ -80,7 +80,7 @@ public class SpawnManager : MonoBehaviour {
 
 		// Reset Slider value
 		SpawnPointsTab[index].progress.maxValue = 100f;
-		SpawnPointsTab[index].progress.value = SpawnPointsTab[index].progress.maxValue;
+		SpawnPointsTab[index].progress.value = 100f;
         SpawnPointsTab[index].progress.interactable = false;
 		// Start Couroutine
 		
@@ -96,7 +96,7 @@ public class SpawnManager : MonoBehaviour {
         float _minRange, _maxRange, reduceTime;
 
 		_CM = SpawnPointsTab [index].client;
-        _maxRange = GameManager.instance.RatioLevel() + _CM.nbProgressPoint;
+        _maxRange = 100;
 
         if (GameManager.instance.RatioLevel() - _CM.nbProgressPoint > 0.0F)
         {
@@ -107,13 +107,13 @@ public class SpawnManager : MonoBehaviour {
             _minRange = 0.0f;
         }
 
-        reduceTime = Random.Range(_minRange, _maxRange);
+        reduceTime = 1.0f;
 
         while (true) {
 
             if (GameManager.instance.gameState == GameManager.gameStates.Playing)
             {
-			    SpawnPointsTab[index].progress.value -= reduceTime;
+			    SpawnPointsTab[index].progress.value -= 1.0f;
             }
 
 			if (SpawnPointsTab[index].progress.value <= 0f) {
@@ -135,10 +135,11 @@ public class SpawnManager : MonoBehaviour {
 			}
 		}
 
-        // Deactive UI of this Spawn Point
-        //SpawnPointsTab[index].progress.value = SpawnPointsTab[index].progress.maxValue;
-        StopCoroutine(ActiveProgressBar(index, 1f));
-        SpawnPointsTab[index].progress.gameObject.SetActive (false);
+		// Deactive UI of this Spawn Point
+		//SpawnPointsTab[index].progress.value = SpawnPointsTab[index].progress.maxValue;
+		SpawnPointsTab[index].progress.value = 1000;
+        //StopCoroutine(ActiveProgressBar(index, 1f));
+        //SpawnPointsTab[index].progress.gameObject.SetActive (false);
 		SpawnPointsTab [index].client = null;
 		SpawnPointsTab [index].demand.sprite = null;
 
